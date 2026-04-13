@@ -13,5 +13,5 @@ Accès SSH
 Analyse des vulnérabilités 
 - Port SSH ouvert
 - Authentification par mot de passe active
-- Configuration par défaut
-- Vulnérable aux attaques brute force 
+- Configuration par défaut non sécurisée
+- Surface d'attaque importante 
