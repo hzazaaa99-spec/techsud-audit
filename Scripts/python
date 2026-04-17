@@ -1,1 +1,81 @@
 
+
+import socket
+
+ 
+
+target = "127.0.0.1"  # IP cible
+ports = [22, 80, 443, 3306]  # ports à tester
+
+ 
+
+print(f"Scan de {target}...\n")
+
+ 
+
+for port in ports:
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.settimeout(1)
+
+ 
+
+    result = sock.connect_ex((target, port))
+
+ 
+
+    if result == 0:
+        print(f"[OUVERT] Port {port}")
+    else:
+        print(f"[FERME] Port {port}")
+
+ 
+
+    sock.close()
+import socket
+import json
+
+ 
+
+target = "127.0.0.1"
+ports = range(1, 1025)
+
+ 
+
+resultats = []
+
+ 
+
+print(f"Scan en cours sur {target}...\n")
+
+ 
+
+for port in ports:
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.settimeout(0.5)
+
+ 
+
+    result = sock.connect_ex((target, port))
+
+ 
+
+    if result == 0:
+        print(f"[OUVERT] {port}")
+        resultats.append({
+            "port": port,
+            "status": "open"
+        })
+
+ 
+
+    sock.close()
+
+ 
+
+# Export JSON
+with open("scan_results.json", "w") as f:
+    json.dump(resultats, f, indent=4)
+
+ 
+
+print("\nRésultats sauvegardés dans scan_results.json")
